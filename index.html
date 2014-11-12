@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="gradebook">
+<head>
+	<title>Angular Demo</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+</head>
+<body>
+
+<div class="container">
+	<h1>Gradebook</h1>
+<!--data might be appended because HTML5 syntax -->
+	<div ng-controller="GradebookController">
+        <!--{{greeting}} &lt;!&ndash;data binding controllers &ndash;&gt;-->
+		<div class="row">
+			<div class="col-md-8">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Grade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="student in students">
+							<td>{{student.first}} {{student.last}}</td> <!--data binding expression -->
+							<td>{{student.grade}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col-md-4">
+				<h4>Summary</h4>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>Average</td>
+							<td>{{gradeAverage}}</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h4>Add Grade</h4>
+                {{first}} {{last}} {{grade}}
+				<form role="form" ng-submit="addStudent()"> <!--submit allows us to listen for submit events -->
+					<div class="form-group">
+						<label>First Name</label>
+						<input ng-model="first" type="text" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Last Name</label>
+						<input ng-model="last" type="text" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Grade (out of 20)</label>
+						<input ng-model="grade" type="number" class="form-control">
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="js/angular.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
