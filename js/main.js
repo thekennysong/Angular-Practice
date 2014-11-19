@@ -22,6 +22,10 @@ app.controller('GradebookController',function($scope,gradesApi,gradeStats){
     //watch allows us to watch anything on scope, and if something happens rerun the function
     $scope.$watch('students',function(){ //whenever students changes, bind again, and rerun
         $scope.gradeAverage = gradeStats.getAverage($scope.students);
+        $scope.gradeLowest = gradeStats.getLowest($scope.students);
+        console.log($scope.gradeLowest);
+        $scope.gradeHighest = gradeStats.getHighest($scope.students);
+        console.log($scope.gradeHighest);
     }, true);
 
 
@@ -60,9 +64,41 @@ app.factory('gradeStats',function(){
 
         return sum/students.length;
     }
+    function getLowest(students){
+        if(students.length > 0){
+        var low = students[0].grade;
 
+        students.forEach(function(student){
+        //low = student.grade[0];
+
+           if(student.grade < low){
+                low = student.grade;
+           }
+        });
+        //console.log(low);
+        return low;
+        }
+    }
+    function getHighest(students){
+        if(students.length > 0){
+        var high = students[0].grade;
+
+        students.forEach(function(student){
+        //high = student.grade[0];
+
+           if(student.grade > high){
+                high = student.grade;
+           }
+        });
+
+        return high;
+        }
+    }    
     return{
-        getAverage: getAverage
+        getAverage: getAverage,
+        getLowest: getLowest,
+        getHighest: getHighest
+
     }
 });
 
